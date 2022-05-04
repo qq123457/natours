@@ -1,0 +1,234 @@
+/* 
+    Light green: #7ed56f
+    Medium green: #55c57a
+    Dark green: #28b485
+*/
+
+ 
+*,
+*::after,
+*::before {
+    margin: 0; 
+    padding: 0;
+    /* 改变盒子内容区大小计算方式 */
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/* 字体 font-family 会被子元素继承 */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    line-height: 1.7;
+    color: #777;
+    padding: 3rem;
+    /* 改变盒子内容区大小计算方式 */
+    box-sizing: border-box;
+}
+
+.header {
+    /* 视口窗的 95% */
+    height: 95vh;
+    background-image: 
+        linear-gradient(
+            to right bottom,
+            rgba(126, 213, 111, 0.80),
+            rgba(40, 180, 133, 0.80)),
+        url(../img/hero.jpg);
+    background-size: cover;
+    /* 设置背景图片的位置 */
+    background-position: top;
+    /* 裁剪 成指定形状 显示*/
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+    position: relative;
+}
+
+.header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+}
+
+.header__logo {
+    /* width 浏览器会自动计算 */
+    height: 3.5rem;
+}
+/* .logo:hover {
+    animation: moveInRight 1s ease-out;
+} */
+
+/* 剧中对其的方式 */
+.header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* 相对于元素本身的移动 */
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+.heading-primary {
+    color: #fff;
+    /* 将单词全部大写 */
+    text-transform: uppercase;
+
+    /* 旋转的时候背面是否可见 */
+    /* backface-visibility: hidden; */
+    margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    
+    /* 使用动画 */
+    animation-name: moveInLeft;
+    /* 设置动画执行时长 */
+    animation-duration: 1s;
+
+    /* 定义动画执行阶段的功能：ease-out 缓慢出 east-in 缓进 */
+    animation-timing-function: ease-out; 
+
+    /* 动画计数: 动画执行的次数*/
+    /* animation-iteration-count: 3; */
+
+    /* 设置动画执行的延迟：多少秒后执行 */
+    /* animation-delay: 3s; */
+}
+
+.heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    
+
+    animation: moveInRight 1s ease-out;
+    /* animation-name: moveInRight;
+    animation-duration: 1s;
+
+    animation-timing-function: ease-out; */
+}
+
+
+/* 动画：关键帧规则 */
+@keyframes moveInLeft {
+    0% {
+        /* 设置不透明度，0表示隐藏 */
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+
+    80% {
+        transform: translateX(1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        /* 设置不透明度，0表示隐藏 */
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    /* 60% {
+        rotate 设置渲染
+        transform: rotate(180deg) ;
+    } */
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+}
+
+/* 初始化 a 标签属性 */
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+
+    /* 过度动画：必须处于初始状态上 */
+    transition: all 0.2s ;
+    position: relative;
+
+    font-size: 1.6rem;
+
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    /* 设置阴影：x方向 y方向 模糊半径 颜色 */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2)
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 0.1rem rgba(0, 0, 0, 0.2)
+}
+
+.btn--white {
+    background-color: #fff;
+    color: #777;
+}
+
+.btn::after {
+    /* 必须存在 */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+.btn--white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    /* scale 增加元素大小 */
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn--animation {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* 应用动画未开始0%的样式 */
+    animation-fill-mode: backwards;
+}
